@@ -72,6 +72,16 @@ export const loginAdmin = async (req, res) => {
             
             const { email, password } = req.body;
 
+            // Debug logging
+            console.log('=== Admin Login Attempt ===');
+            console.log('Received email:', email);
+            console.log('Received password:', password);
+            console.log('Expected email:', process.env.ADMIN_EMAIL);
+            console.log('Expected password:', process.env.ADMIN_PASSWORD);
+            console.log('Email match:', email === process.env.ADMIN_EMAIL);
+            console.log('Password match:', password === process.env.ADMIN_PASSWORD);
+            console.log('========================');
+
             if(email===process.env.ADMIN_EMAIL && password===process.env.ADMIN_PASSWORD)
             {
                 const token = jwt.sign(email+password, process.env.JWT_SECRET)
