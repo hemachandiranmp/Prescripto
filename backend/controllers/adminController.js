@@ -31,9 +31,16 @@ export const addDoctor = async (req, res) => {
          }
 
 
-         // hashing doctor password
          const salt = await bcrypt.genSalt(10);
          const hashedPassword = await bcrypt.hash(password, salt);
+
+         // Check if image file is present
+         if(!imageFile) {
+             console.log("No image file received!");
+             return res.json({success:false, message: "Image upload failed: No file received"});
+         }
+
+         console.log("Image file received:", imageFile.originalname);
 
          // upload image to cloudinary
          const imageUpload = await cloudinary.uploader.upload(imageFile.path,{resource_type: "image"})

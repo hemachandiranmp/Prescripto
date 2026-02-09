@@ -5,8 +5,9 @@ import jwt from "jsonwebtoken";
 const authAdmin = (req, res, next) => {
 
     try {
-        
+        console.log("Auth Admin Middleware Reached");
         const {atoken} = req.headers
+        console.log("Token received:", atoken);
         if(!atoken)
         {
             return res.json({success:false,message: "Not Authorized Login Again "})
